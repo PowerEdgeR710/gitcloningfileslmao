@@ -1,0 +1,9 @@
+qemu-system-or1k \
+  -kernel or1k-linux-5.0-smp \
+  -nic user,net=10.9.0.0/24,host=10.9.0.100,dns=10.9.0.3 \
+  -serial mon:stdio \
+  -nographic \
+  -gdb tcp::10001 \
+  -smp 1 \
+  -m 32M \
+  -append earlycon
