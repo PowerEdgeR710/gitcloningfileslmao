@@ -1,9 +1,55 @@
+#!/bin/bash
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+CYAN="\033[1;36m"
+MAGENTA="\033[1;35m"
+RESET="\033[0m"
+
+clear
+figlet "OpenRISC"
+echo -e "${YELLOW}Emu${RED}lat${CYAN}er${RESET}"
+
+echo -e "${CYAN}╔════════════════════════════════════════╗"
+echo -e "║          ${RESET}Hello ${GREEN}User${RESET}, welcome!${CYAN}          ║"
+echo -e "╚════════════════════════════════════════╝${RESET}"
+echo
+
+echo -e "${YELLOW}This is a free service, however you're ${RED}limited${YELLOW} to these:${RESET}"
+echo -e "- Your file system is ${RED}ephemeral${RESET}. When you logout or SSH goes down, you lose everything."
+echo -e "- Your network is ${RED}limited${RESET} to 50 Mbps."
+echo -e "- Your server will ${RED}shutdown${RESET} on logout."
+echo
+
+echo -e "${YELLOW}This will emulate:${RESET}"
+echo -e "- 1-core OpenRISC-13 (revision 8) @20 MHz"
+echo -e "- 32 Megabytes of RAM"
+echo -e "- 24 Megabytes of Storage"
+echo
+
+echo -e "${MAGENTA}To log out of the server, use Ctrl+A + X${RESET}"
+echo -e "To get network access, use the \`udhcpc\` command with no arguments."
+echo "Good luck!"
+echo
+for i in {10..1}; do
+    echo -ne "${GREEN}Your server will start in: ${RESET}${RED}$i${RESET}  \r"
+    sleep 1
+done
+echo -e "\n"
+
+clear
+figlet "OpenRISC"
+echo
+
 qemu-system-or1k \
   -kernel or1k-linux-5.0-smp \
   -nic user,net=10.9.0.0/24,host=10.9.0.100,dns=10.9.0.3 \
   -serial mon:stdio \
   -nographic \
-  -gdb tcp::10001 \
-  -smp 1 \
   -m 32M \
   -append earlycon
+
+echo
+echo -e "${RED}Good bye${RESET}"
+echo -e "Check out the 5136.cloud community: ${CYAN}https://discord.gg/b6KyMkVaJf${RESET}"
+echo
