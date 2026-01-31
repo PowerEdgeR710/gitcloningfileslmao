@@ -27,7 +27,7 @@ echo -e "- 32 Megabytes of RAM"
 echo -e "- 24 Megabytes of Storage"
 echo
 
-echo -e "${MAGENTA}To log out of the server, use Ctrl+A + X${RESET}"
+echo -e "${MAGENTA}To log out of the server, use \`halt\` command and then Ctrl+C.${RESET}"
 echo -e "To get network access, use the \`udhcpc\` command with no arguments."
 echo "Good luck!"
 echo
@@ -44,8 +44,7 @@ echo
 qemu-system-or1k \
   -kernel or1k-linux-5.0-smp \
   -nic user,net=10.9.0.0/24,host=10.9.0.100,dns=10.9.0.3 \
-  -serial mon:stdio \
-  -nographic \
+  -serial stdio \
   -m 32M \
   -append earlycon
 
